@@ -21,10 +21,8 @@ const register = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
   try {
     const data = loginSchema.parse(req.body); 
-    const { user } = await AuthService.loginUser(data);
-
-    const tokens = setToken({ res, userId: user.id, role: user.role });
-
+    const { user } = await AuthService.loginUser(data); 
+    const tokens = setToken({ res, userId: user.id, role: user.role }); 
     res.json({ success: true, user, tokens });
   } catch (err: any) {
     console.error("Login Error:", err);

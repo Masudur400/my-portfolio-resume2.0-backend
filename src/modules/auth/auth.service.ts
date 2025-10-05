@@ -7,10 +7,8 @@ export const registerUser = async (input: RegisterInput) => {
   const existingUser = await prisma.user.findUnique({
     where: { email: input.email },
   });
-  if (existingUser) throw new Error("User already exists");
-
-  const hashed = await bcrypt.hash(input.password, 10);
-
+  if (existingUser) throw new Error("User already exists"); 
+  const hashed = await bcrypt.hash(input.password, 10); 
   const user = await prisma.user.create({
     data: {
       email: input.email,
@@ -25,11 +23,9 @@ export const registerUser = async (input: RegisterInput) => {
 
 export const loginUser = async (input: LoginInput) => {
   const user = await prisma.user.findUnique({ where: { email: input.email } });
-  if (!user) throw new Error("Invalid credentials");
-
+  if (!user) throw new Error("Invalid credentials"); 
   const isValid = await bcrypt.compare(input.password, user.password);
-  if (!isValid) throw new Error("Invalid credentials");
-
+  if (!isValid) throw new Error("Invalid credentials"); 
   return { user };
 };
 
