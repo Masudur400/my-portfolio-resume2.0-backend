@@ -9,8 +9,8 @@
     "start": "node dist/server.js",
     "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev --name init",
-    "prisma:reset": "prisma migrate reset --force --skip-seed",
+    "migrate": "prisma migrate dev --name init",
+    "reset": "prisma migrate reset --force --skip-seed",
     "prisma:studio": "prisma studio",
     "db:push": "prisma db push",
     "db:seed": "ts-node prisma/seed.ts"
