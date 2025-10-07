@@ -18,6 +18,14 @@ const createProject = async (req: AuthRequest, res: Response, next: NextFunction
         rawBody.features = [rawBody.features];
       }
     }
+    // ✅ Parse technologies if it's a JSON string
+    if (typeof rawBody.technologies === "string") {
+      try {
+        rawBody.technologies = JSON.parse(rawBody.technologies);
+      } catch {
+        rawBody.technologies = [rawBody.technologies];
+      }
+    }
 
     const body = createProjectSchema.parse(rawBody);
     const user = req.user as any;
@@ -35,6 +43,10 @@ const createProject = async (req: AuthRequest, res: Response, next: NextFunction
     next(err);
   }
 };
+
+
+
+
 
 
 const listProjects = async (_req: Request, res: Response, next: NextFunction) => {

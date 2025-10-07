@@ -1,5 +1,9 @@
+
+
 import { prisma } from "../../config/db";
 import { CreateProjectInput, UpdateProjectInput } from "./project.modal";
+
+
 const createProject = async (
   data: CreateProjectInput,
   authorId: number,
@@ -11,6 +15,7 @@ const createProject = async (
       slug: data.slug,
       description: data.description,
       features: data.features ?? [],
+      technologies: data.technologies ?? [],
       thumbnail: imageUrl ?? data.thumbnail ?? null,
       liveUrl: data.liveUrl ?? null,
       frontendRepoUrl: data.frontendRepoUrl ?? null,
@@ -19,6 +24,13 @@ const createProject = async (
     },
   });
 };
+
+
+
+ 
+
+
+
 
 const getAllProjects = async () => {
   return prisma.project.findMany({

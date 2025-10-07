@@ -5,6 +5,7 @@ export const createProjectSchema = z.object({
   slug: z.string().min(3, "Slug must be at least 3 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
   features: z.array(z.string()).optional(),
+  technologies: z.array(z.string()).optional(),
   thumbnail: z.string().optional(),
   liveUrl: z.string().url().optional(),
   frontendRepoUrl: z.string().url().optional(),

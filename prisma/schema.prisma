@@ -42,6 +42,7 @@ model Project {
   slug            String   @unique
   description     String
   features        String[] @default([])
+  technologies        String[] @default([])
   thumbnail       String?
   liveUrl         String?
   frontendRepoUrl String?
