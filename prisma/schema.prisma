@@ -52,6 +52,9 @@ model Project {
   author          User     @relation(fields: [authorId], references: [id])
 }
 
+
+
+
 enum UserRole {
   OWNER
   USER

@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 
 import { v2 as cloudinary } from "cloudinary";
 import AppError from "../errorhelpers/AppError";
- 
+
+
+
+// Amader folder -> image -> form data -> File -> Multer -> Amader project / pc te Nijer ekta folder(temporary) -> Req.file
+
+//req.file -> cloudinary(req.file) -> url -> mongoose -> mongodb
 
 
 dotenv.config();
@@ -17,7 +22,8 @@ cloudinary.config({
 });
 
 export const deleteImageFromCLoudinary = async (url: string) => {
-    try { 
+    try {
+        //https://res.cloudinary.com/djzppynpk/image/upload/v1753126572/ay9roxiv8ue-1753126570086-download-2-jpg.jpg.jpg
 
         const regex = /\/v\d+\/(.*?)\.(jpg|jpeg|png|gif|webp)$/i;
 

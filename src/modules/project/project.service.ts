@@ -22,7 +22,7 @@ const createProject = async (
 
 const getAllProjects = async () => {
   return prisma.project.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy: { title: "asc" },
   });
 };
 
