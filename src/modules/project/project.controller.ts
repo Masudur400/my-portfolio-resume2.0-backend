@@ -6,47 +6,69 @@ interface AuthRequest extends Request {
   user?: any;
 }
 
+// const createProject = async (req: AuthRequest, res: Response, next: NextFunction) => {
+//   try {
+//     let rawBody = { ...req.body }; 
+//     if (typeof rawBody.features === "string") {
+//       try {
+//         rawBody.features = JSON.parse(rawBody.features);
+//       } catch {
+//         rawBody.features = [rawBody.features];
+//       }
+//     } 
+//     if (typeof rawBody.technologies === "string") {
+//       try {
+//         rawBody.technologies = JSON.parse(rawBody.technologies);
+//       } catch {
+//         rawBody.technologies = [rawBody.technologies];
+//       }
+//     } 
+//     const body = createProjectSchema.parse(rawBody);
+//     const user = req.user as any;
+//     const authorId = Number(user?.id || user?.userId); 
+//     if (!authorId) {
+//       return res.status(401).json({ success: false, message: "Unauthenticated" });
+//     } 
+//     const imageUrl = (req.file as any)?.path ?? undefined;
+//     const project = await projectService.createProject(body, authorId, imageUrl); 
+//     res.status(201).json({ success: true, data: project });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+
+
 const createProject = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    let rawBody = { ...req.body };
-
-    // ✅ Parse features if it's a JSON string
-    if (typeof rawBody.features === "string") {
-      try {
-        rawBody.features = JSON.parse(rawBody.features);
-      } catch {
-        rawBody.features = [rawBody.features];
-      }
-    }
-    // ✅ Parse technologies if it's a JSON string
-    if (typeof rawBody.technologies === "string") {
-      try {
-        rawBody.technologies = JSON.parse(rawBody.technologies);
-      } catch {
-        rawBody.technologies = [rawBody.technologies];
-      }
-    }
-
-    const body = createProjectSchema.parse(rawBody);
+    const rawBody = { ...req.body };
+    const features = Array.isArray(rawBody.features)
+      ? rawBody.features
+      : rawBody.features
+        ? [rawBody.features]
+        : [];
+    const technologies = Array.isArray(rawBody.technologies)
+      ? rawBody.technologies
+      : rawBody.technologies
+        ? [rawBody.technologies]
+        : [];
+    const body = createProjectSchema.parse({
+      ...rawBody,
+      features,
+      technologies,
+    });
     const user = req.user as any;
     const authorId = Number(user?.id || user?.userId);
-
     if (!authorId) {
       return res.status(401).json({ success: false, message: "Unauthenticated" });
     }
-
     const imageUrl = (req.file as any)?.path ?? undefined;
     const project = await projectService.createProject(body, authorId, imageUrl);
-
     res.status(201).json({ success: true, data: project });
   } catch (err) {
     next(err);
   }
 };
-
-
-
-
 
 
 const listProjects = async (_req: Request, res: Response, next: NextFunction) => {

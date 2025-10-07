@@ -1,14 +1,8 @@
-
-
 import { prisma } from "../../config/db";
 import { CreateProjectInput, UpdateProjectInput } from "./project.modal";
 
 
-const createProject = async (
-  data: CreateProjectInput,
-  authorId: number,
-  imageUrl?: string
-) => {
+const createProject = async (data: CreateProjectInput, authorId: number, imageUrl?: string) => {
   return prisma.project.create({
     data: {
       title: data.title,
@@ -27,14 +21,10 @@ const createProject = async (
 
 
 
- 
-
-
-
-
 const getAllProjects = async () => {
   return prisma.project.findMany({
     orderBy: { title: "asc" },
+    // orderBy: { id: "asc" },
   });
 };
 
