@@ -28,7 +28,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     });
   }
 };
- const deleteUser = async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
   try {
     const userId = Number(req.params.id);
     const deletedUser = await UserService.deleteUser(userId);
@@ -38,7 +38,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
- const updateUserRole = async (req: Request, res: Response) => {
+const updateUserRole = async (req: Request, res: Response) => {
   try {
     const userId = Number(req.params.id);
     const { role } = req.body;
@@ -58,6 +58,6 @@ export const getAllUsers = async (req: Request, res: Response) => {
 };
 
 export const UserController = {
-    deleteUser,
-    updateUserRole
+  deleteUser,
+  updateUserRole
 }
