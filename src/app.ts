@@ -20,12 +20,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
-    credentials: true, // important for cookies
-  })
-);
+app.use(cors({
+    origin: [
+        process.env.FRONTEND_URL1 as string,
+        process.env.FRONTEND_URL2 as string, 
+    ],
+    credentials: true,
+    //     methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
+    //   allowedHeaders: ["Content-Type", "Authorization"]
+}))
 
 // Routes
 app.use("/api/auth", AuthRoutes);

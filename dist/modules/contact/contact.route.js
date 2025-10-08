@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContactRoutes = void 0;
+const express_1 = require("express");
+// import { checkAuth } from "../../middlewares/checkAuth";
+// import { Role } from "../user/user.interface"; 
+const contact_controller_1 = require("./contact.controller");
+const router = (0, express_1.Router)();
+router.post("/", contact_controller_1.contactControllers.sendContactMail);
+exports.ContactRoutes = router;
